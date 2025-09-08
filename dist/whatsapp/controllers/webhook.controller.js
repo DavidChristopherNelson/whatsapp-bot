@@ -16,10 +16,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.WebhookController = void 0;
 const common_1 = require("@nestjs/common");
 const config_1 = require("@nestjs/config");
+const reply_service_1 = require("../services/reply.service");
 const signature_guard_1 = require("../../common/guards/signature.guard");
 let WebhookController = WebhookController_1 = class WebhookController {
-    constructor(config) {
+    constructor(config, reply) {
         this.config = config;
+        this.reply = reply;
         this.logger = new common_1.Logger(WebhookController_1.name);
     }
     verifyWebhook(mode, token, challenge, res) {
@@ -35,6 +37,7 @@ let WebhookController = WebhookController_1 = class WebhookController {
         const value = body?.entry?.[0]?.changes?.[0]?.value;
         if (value) {
             this.logger.log({ contacts: value.contacts?.[0]?.wa_id, messageType: value.messages?.[0]?.type, messageId: value.messages?.[0]?.id });
+            await this.reply.route(value);
         }
         return { status: 'ok' };
     }
@@ -62,6 +65,6 @@ __decorate([
 ], WebhookController.prototype, "handleWebhook", null);
 exports.WebhookController = WebhookController = WebhookController_1 = __decorate([
     (0, common_1.Controller)('webhook'),
-    __metadata("design:paramtypes", [config_1.ConfigService])
+    __metadata("design:paramtypes", [config_1.ConfigService, reply_service_1.ReplyService])
 ], WebhookController);
 //# sourceMappingURL=webhook.controller.js.map
