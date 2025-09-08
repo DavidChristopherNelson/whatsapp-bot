@@ -1,4 +1,4 @@
-import { Controller, Get, Query, Res, HttpStatus, Post, Body, Headers, UseGuards, Logger } from '@nestjs/common';
+import { Controller, Get, Query, Res, HttpStatus, Post, Body, Headers, UseGuards, Logger, HttpCode } from '@nestjs/common';
 import { Response } from 'express';
 import { ConfigService } from '@nestjs/config';
 import { WhatsappWebhookPayload, MinimalWebhookValue } from '../../common/dto/whatsapp-webhook.dto';
@@ -28,6 +28,7 @@ export class WebhookController {
   }
 
   @Post()
+  @HttpCode(200)
   @UseGuards(SignatureGuard)
   async handleWebhook(
     @Body() body: WhatsappWebhookPayload,

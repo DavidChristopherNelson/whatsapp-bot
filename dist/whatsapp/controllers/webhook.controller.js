@@ -52,6 +52,7 @@ __decorate([
 ], WebhookController.prototype, "verifyWebhook", null);
 __decorate([
     (0, common_1.Post)(),
+    (0, common_1.HttpCode)(200),
     (0, common_1.UseGuards)(signature_guard_1.SignatureGuard),
     __param(0, (0, common_1.Body)()),
     __param(1, (0, common_1.Headers)('x-hub-signature-256')),
