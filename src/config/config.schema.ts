@@ -10,7 +10,12 @@ export const envSchema = z.object({
   PLATFORM_BASE_URL: z.string().url(),
   PLATFORM_WHATSAPP_ENDPOINT: z.string().min(1),
   WA_PLEASE_VOICE_MEDIA_ID: z.string().optional(),
-  PORT: z.coerce.number().int().positive().default(3000),
+  VERIFY_SIGNATURE: z
+    .union([z.boolean(), z.string()])
+    .transform((v) => (typeof v === 'string' ? v === 'true' : v))
+    .optional()
+    .default(false),
+  PORT: z.coerce.number().int().positive().default(3050),
 });
 
 export type Env = z.infer<typeof envSchema>;

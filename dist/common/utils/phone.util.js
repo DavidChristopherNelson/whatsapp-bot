@@ -1,14 +1,21 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.waIdToE164IndiaOnly = waIdToE164IndiaOnly;
-function waIdToE164IndiaOnly(waId) {
+exports.UnsupportedNumberError = void 0;
+exports.toE164India = toE164India;
+class UnsupportedNumberError extends Error {
+    constructor(message = 'Unsupported phone number') {
+        super(message);
+        this.name = 'UnsupportedNumberError';
+    }
+}
+exports.UnsupportedNumberError = UnsupportedNumberError;
+function toE164India(waId) {
     const digits = (waId || '').replace(/\D/g, '');
-    if (digits.length === 12 && digits.startsWith('91')) {
+    const isIndiaPrefixed = digits.startsWith('91');
+    const isValidLength = digits.length >= 12 && digits.length <= 13;
+    if (isIndiaPrefixed && isValidLength) {
         return `+${digits}`;
     }
-    if (digits.length === 10) {
-        return `+91${digits}`;
-    }
-    return null;
+    throw new UnsupportedNumberError();
 }
 //# sourceMappingURL=phone.util.js.map

@@ -12,6 +12,11 @@ exports.envSchema = zod_1.z.object({
     PLATFORM_BASE_URL: zod_1.z.string().url(),
     PLATFORM_WHATSAPP_ENDPOINT: zod_1.z.string().min(1),
     WA_PLEASE_VOICE_MEDIA_ID: zod_1.z.string().optional(),
-    PORT: zod_1.z.coerce.number().int().positive().default(3000),
+    VERIFY_SIGNATURE: zod_1.z
+        .union([zod_1.z.boolean(), zod_1.z.string()])
+        .transform((v) => (typeof v === 'string' ? v === 'true' : v))
+        .optional()
+        .default(false),
+    PORT: zod_1.z.coerce.number().int().positive().default(3050),
 });
 //# sourceMappingURL=config.schema.js.map

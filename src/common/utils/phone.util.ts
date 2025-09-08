@@ -4,15 +4,21 @@
  * - If wa_id has 10 digits, assumes India and prefixes +91.
  * - Otherwise returns null to indicate unsupported.
  */
-export function waIdToE164IndiaOnly(waId: string): string | null {
+export class UnsupportedNumberError extends Error {
+  constructor(message = 'Unsupported phone number') {
+    super(message);
+    this.name = 'UnsupportedNumberError';
+  }
+}
+
+export function toE164India(waId: string): string {
   const digits = (waId || '').replace(/\D/g, '');
-  if (digits.length === 12 && digits.startsWith('91')) {
+  const isIndiaPrefixed = digits.startsWith('91');
+  const isValidLength = digits.length >= 12 && digits.length <= 13; // allow future variations
+  if (isIndiaPrefixed && isValidLength) {
     return `+${digits}`;
   }
-  if (digits.length === 10) {
-    return `+91${digits}`;
-  }
-  return null;
+  throw new UnsupportedNumberError();
 }
 
 
