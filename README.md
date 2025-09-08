@@ -1,0 +1,3 @@
+# WhatsApp Bot
+
+Initial scaffold.
