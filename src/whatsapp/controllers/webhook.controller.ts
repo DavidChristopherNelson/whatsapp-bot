@@ -2,6 +2,7 @@ import { Controller, Get, Query, Res, HttpStatus, Post, Body, Headers, UseGuards
 import { Response } from 'express';
 import { ConfigService } from '@nestjs/config';
 import { WhatsappWebhookPayload, MinimalWebhookValue } from '../../common/dto/whatsapp-webhook.dto';
+import { ReplyService } from '../services/reply.service';
 
 // Simple optional signature verification guard
 import { SignatureGuard } from '../../common/guards/signature.guard';
@@ -10,7 +11,7 @@ import { SignatureGuard } from '../../common/guards/signature.guard';
 export class WebhookController {
   private readonly logger = new Logger(WebhookController.name);
 
-  constructor(private readonly config: ConfigService) {}
+  constructor(private readonly config: ConfigService, private readonly reply: ReplyService) {}
 
   @Get()
   verifyWebhook(
@@ -35,10 +36,18 @@ export class WebhookController {
     @Headers('x-hub-signature-256') _sig: string | undefined,
   ) {
     const value: MinimalWebhookValue | undefined = body?.entry?.[0]?.changes?.[0]?.value as MinimalWebhookValue | undefined;
-    if (value) {
-      this.logger.log({ contacts: value.contacts?.[0]?.wa_id, messageType: value.messages?.[0]?.type, messageId: value.messages?.[0]?.id });
+    try {
+      if (value) {
+        this.logger.log({ contacts: value.contacts?.[0]?.wa_id, messageType: value.messages?.[0]?.type, messageId: value.messages?.[0]?.id });
+        await this.reply.handleIncoming(value);
+      } else {
+        this.logger.log({});
+      }
+      return { status: 'ok' };
+    } catch (err: any) {
+      this.logger.error(err?.message ?? String(err));
+      return { status: 'ok' };
     }
-    return { status: 'ok' };
   }
 }
 
