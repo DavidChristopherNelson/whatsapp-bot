@@ -1,0 +1,95 @@
+├── .env.example (12 lines)
+├── .eslintrc.cjs (29 lines)
+├── .gitignore (6 lines)
+├── .prettierrc.json (8 lines)
+├── Dockerfile (23 lines)
+├── README.md (39 lines)
+├── assets
+│   └── please-use-voice-message.ogg (unreadable)
+├── dist
+│   ├── app.module.js (23 lines)
+│   ├── app.module.js.map (1 lines)
+│   ├── backend
+│   │   ├── backend.module.js (21 lines)
+│   │   ├── backend.module.js.map (1 lines)
+│   │   ├── platform-client.service.js (39 lines)
+│   │   └── platform-client.service.js.map (1 lines)
+│   ├── common
+│   │   ├── dto
+│   │   │   ├── whatsapp-webhook.dto.js (3 lines)
+│   │   │   └── whatsapp-webhook.dto.js.map (1 lines)
+│   │   ├── guards
+│   │   │   ├── signature.guard.js (48 lines)
+│   │   │   └── signature.guard.js.map (1 lines)
+│   │   └── utils
+│   │       ├── audio.util.js (30 lines)
+│   │       ├── audio.util.js.map (1 lines)
+│   │       ├── phone.util.js (21 lines)
+│   │       └── phone.util.js.map (1 lines)
+│   ├── config
+│   │   ├── config.module.js (36 lines)
+│   │   ├── config.module.js.map (1 lines)
+│   │   ├── config.schema.js (22 lines)
+│   │   └── config.schema.js.map (1 lines)
+│   ├── main.js (43 lines)
+│   ├── main.js.map (1 lines)
+│   ├── scheduler
+│   │   ├── jobs
+│   │   │   ├── daily-voice.job.js (6 lines)
+│   │   │   └── daily-voice.job.js.map (1 lines)
+│   │   ├── scheduler.module.js (19 lines)
+│   │   └── scheduler.module.js.map (1 lines)
+│   └── whatsapp
+│       ├── controllers
+│       │   ├── webhook.controller.js (70 lines)
+│       │   └── webhook.controller.js.map (1 lines)
+│       ├── services
+│       │   ├── media.service.js (64 lines)
+│       │   ├── media.service.js.map (1 lines)
+│       │   ├── reply.service.js (100 lines)
+│       │   ├── reply.service.js.map (1 lines)
+│       │   ├── whatsapp.service.js (143 lines)
+│       │   └── whatsapp.service.js.map (1 lines)
+│       ├── whatsapp.module.js (27 lines)
+│       └── whatsapp.module.js.map (1 lines)
+├── jest.config.js (11 lines)
+├── nest-cli.json (6 lines)
+├── node_modules
+├── package-lock.json (9402 lines)
+├── package.json (48 lines)
+├── src
+│   ├── app.module.ts (12 lines)
+│   ├── backend
+│   │   ├── backend.module.ts (10 lines)
+│   │   └── platform-client.service.ts (20 lines)
+│   ├── common
+│   │   ├── dto
+│   │   │   └── whatsapp-webhook.dto.ts (38 lines)
+│   │   ├── guards
+│   │   │   └── signature.guard.ts (33 lines)
+│   │   └── utils
+│   │       ├── audio.util.ts (29 lines)
+│   │       └── phone.util.ts (24 lines)
+│   ├── config
+│   │   ├── config.module.ts (27 lines)
+│   │   └── config.schema.ts (23 lines)
+│   ├── main.ts (50 lines)
+│   ├── scheduler
+│   │   ├── jobs
+│   │   │   └── daily-voice.job.ts (6 lines)
+│   │   └── scheduler.module.ts (8 lines)
+│   └── whatsapp
+│       ├── controllers
+│       │   └── webhook.controller.ts (47 lines)
+│       ├── services
+│       │   ├── media.service.ts (49 lines)
+│       │   ├── reply.service.ts (94 lines)
+│       │   └── whatsapp.service.ts (126 lines)
+│       └── whatsapp.module.ts (16 lines)
+├── tests
+│   ├── media.service.spec.ts (25 lines)
+│   ├── phone.util.spec.ts (16 lines)
+│   ├── platform-client.service.spec.ts (20 lines)
+│   └── whatsapp.service.spec.ts (64 lines)
+├── tsconfig.build.json (11 lines)
+└── tsconfig.json (22 lines)
